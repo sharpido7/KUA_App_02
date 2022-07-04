@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:my_ideas_today/registration.dart';
 import 'package:my_ideas_today/new_homepage.dart';
+import 'package:get/get.dart';
+import 'package:my_ideas_today/splashscreen.dart';
 
 void  main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,13 +18,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
    
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      home:  SplashScreen(),
     );
   }
 }

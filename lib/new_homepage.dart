@@ -1,14 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 // import 'package:kua_app_01/registration.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ideas_today/registration.dart';
 // import 'package:kua_app_01/course_upload.dart';
 // import 'list.dart';
-// import 'package:kua_app_01/lesson_page.dart';
-// import 'package:kua_app_01/profile_page.dart';
+import 'package:my_ideas_today/lesson_page.dart';
+import 'package:my_ideas_today/profile_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-
+String finalPhone='';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -40,7 +43,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   void _onItemTapped(int index) {
     print(index);
     if (index == 2) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
     }
     if (index == 1) {
       Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
@@ -50,13 +53,22 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     });
   }
 
+  Future getValidationData()async{ 
+    final SharedPreferences sharedPreferences =await SharedPreferences.getInstance();
+    var obtainedPhone=sharedPreferences.getString('phone');
+    setState((){
+      finalPhone = obtainedPhone!;
+    });
+    print(finalPhone);
+  }
+
   Widget CourseCard(firstName, lastName, courseTitle, imageName) {
     return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Home())),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Coursepage())),
       child: Container(
         margin: EdgeInsets.all(8.0),
-        height: 100.0,
-        width: 133,
+        height: 150.0,
+        width: 170,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage("$imageName"),
@@ -80,13 +92,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               color: Colors.white,
             ),
           ),
-          Divider(
-            height: 5.0,
-            thickness: 2.0,
-            indent: 57,
-            endIndent: 57,
-            color: Colors.white,
-          ),
+          //I commented the Divider
+          // Divider(
+          //   height: 5.0,
+          //   thickness: 2.0,
+          //   indent: 57,
+          //   endIndent: 57,
+          //   color: Colors.white,
+          // ),
           Text(
             "$courseTitle",
             textAlign: TextAlign.center,
@@ -117,6 +130,25 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text('KUA App',style:TextStyle(color: Colors.orange)),backgroundColor:Colors.black, 
+        
+        actions: [
+          IconButton(icon: Icon(Icons.logout), onPressed: ()async {
+          final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+          sharedPreferences.remove('phone');
+                               Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => 
+                            // HomePage()));
+                            Registration()));
+         
+                  await FirebaseAuth.instance.signOut();
+                   Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (context) =>Registration()),(route) => false);
+               }
+              )
+        ],
+      ),
       body: ListView(children: [
         SizedBox(
           height: 5.0,
@@ -126,7 +158,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
-              "Hello",
+              "Welcome",
               style: TextStyle(
                 fontFamily: 'WaterBrush',
                 fontSize: 22.0,
@@ -171,7 +203,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             children: documents
                     .map((doc) =>
               //new card
-              CourseCard(doc['Author'],doc['Category'], doc['Title'], doc['Photo']),
+              // CourseCard(doc['Author'],doc['Category'], doc['Title'], doc['Photo']),
+              CourseCard('','','', doc['Photo']),
 
            
                 ).toList());
@@ -207,13 +240,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           child: ListView(
             // This next line does the trick.
             scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              CourseCard('JOKATE', 'MWANGELO', 'Leadership', 'jokate'),
-              CourseCard('DIAMOND', 'PLATNUMZ', 'Music and Lyrics', 'diamond'),
-              CourseCard('DIAMOND', 'PLATNUMZ', 'Music and Lyrics', 'diamond'),
-              CourseCard('DIAMOND', 'PLATNUMZ', 'Music and Lyrics', 'diamond'),
-              CourseCard('DIAMOND', 'PLATNUMZ', 'Music and Lyrics', 'diamond'),
-            ],
+//Some cards go here
           ),
         ),
         Padding(
@@ -239,13 +266,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           child: ListView(
             // This next line does the trick.
             scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              CourseCard('JOKATE', 'MWANGELO', 'Leadership', 'jokate'),
-              CourseCard('DIAMOND', 'PLATNUMZ', 'Music and Lyrics', 'diamond'),
-              CourseCard('DIAMOND', 'PLATNUMZ', 'Music and Lyrics', 'diamond'),
-              CourseCard('DIAMOND', 'PLATNUMZ', 'Music and Lyrics', 'diamond'),
-              CourseCard('DIAMOND', 'PLATNUMZ', 'Music and Lyrics', 'diamond'),
-            ],
+  //Some cards also go here
           ),
         ),
       ]),

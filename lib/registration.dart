@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:kua_app_01/course.dart';
+// import 'package:kua_app_01/otp_screen.dart';
 // import 'package:kua_app_01/homepage.dart';
 // import 'package:kua_app_01/otp_screen.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_ideas_today/otp_screen.dart';
 
  
 
@@ -368,11 +369,12 @@ class _RegistrationState extends State<Registration> {
              
             //Here is whare we have the shared preferences 
              
-                    //  final SharedPreferences sharedpreferences = await SharedPreferences.getInstance();
-                    //        sharedpreferences.setString('phone', _controller.text);
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //     builder: (context) => HomePage()));
-                            // OtpPage( _controller.text)));
+                     final SharedPreferences sharedpreferences = await SharedPreferences.getInstance();
+                           sharedpreferences.setString('phone', _controller.text);
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => 
+                            // HomePage()));
+                            OtpPage( _controller.text)));
                   
           // }
 

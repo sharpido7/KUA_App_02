@@ -5,6 +5,7 @@ import 'package:my_ideas_today/registration.dart';
 import 'package:my_ideas_today/new_homepage.dart';
 import 'package:get/get.dart';
 import 'package:my_ideas_today/splashscreen.dart';
+import 'package:my_ideas_today/upload.dart';
 
 void  main() async{
   WidgetsFlutterBinding.ensureInitialized();

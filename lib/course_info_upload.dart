@@ -4,7 +4,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'dart:io';
 
-import 'package:permission_handler/permission_handler.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:my_ideas_today/storage_service.dart';
+
 
 class CourseUpload extends StatefulWidget {
   const CourseUpload({Key? key}) : super(key: key);
@@ -58,6 +62,7 @@ class _CourseUpState extends State<CourseUp> {
   TextEditingController sampledata1 = new TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final Storage storage =Storage();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -78,11 +83,26 @@ class _CourseUpState extends State<CourseUp> {
               Field(author, 'Author'),
               Field(category, 'Category'),
               Field(title, 'Course Title'),
-              FlatButton(
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Vid())),
-                child: Text('Upload Video'),
-                color: Colors.orange,
-              ),
+              ElevatedButton(
+       
+        onPressed: ()async{
+        final result = await FilePicker.platform.pickFiles(
+          allowMultiple: false,
+          type: FileType.custom,
+          allowedExtensions: ['png','jpg']
+        );
+        if(result== null){
+          ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("No file selected"))
+          );
+          return null;
+        }
+        final path =result.files.single.path!;
+        final fileName =result.files.single.name;
+        storage.uploadFile(path,fileName).then(((value) => print('done')));
+        print(path);
+        print(fileName);
+      }, child: Text("Upload Image", style: TextStyle(color:Colors.black)))
               SizedBox(
                 height: 20.0,
               ),
@@ -107,3 +127,5 @@ class _CourseUpState extends State<CourseUp> {
     );
   }
 }
+
+

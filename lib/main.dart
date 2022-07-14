@@ -6,11 +6,12 @@ import 'package:my_ideas_today/new_homepage.dart';
 import 'package:get/get.dart';
 import 'package:my_ideas_today/splashscreen.dart';
 import 'package:my_ideas_today/upload.dart';
+import 'package:my_ideas_today/admin_registration.dart';
 
-void  main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(const SignupScreen());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,18 +24,15 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-   
         primarySwatch: Colors.blue,
       ),
-      home:  SplashScreen(),
+      home: SplashScreen(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  
 
   final String title;
 
@@ -43,20 +41,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
-
- FirebaseFirestore db = FirebaseFirestore.instance;
+  FirebaseFirestore db = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-  
         title: Text(widget.title),
       ),
       body: Center(
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -71,18 +64,18 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed:  (){
-                  Map<String, dynamic> data = {
-                    "author": 'Gils',
-                    "category":'Music',
-                    "title": 'Always',
-                  };
-                  FirebaseFirestore.instance.collection('Movie').add(data);
-                  print("Done");
-                },
+        onPressed: () {
+          Map<String, dynamic> data = {
+            "author": 'Gils',
+            "category": 'Music',
+            "title": 'Always',
+          };
+          FirebaseFirestore.instance.collection('Movie').add(data);
+          print("Done");
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), 
+      ),
     );
   }
 }

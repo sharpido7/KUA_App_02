@@ -13,32 +13,29 @@ class Upload extends StatefulWidget {
 class _UploadState extends State<Upload> {
   @override
   Widget build(BuildContext context) {
-    final Storage storage =Storage();
+    final Storage storage = Storage();
     return Scaffold(
       appBar: AppBar(
-         title: Text('Upload Image',style: TextStyle( color: Color.fromARGB(255, 241, 153, 55))),),
-      body: Center(child: ElevatedButton(
-       
-        onPressed: ()async{
-        final result = await FilePicker.platform.pickFiles(
-          allowMultiple: false,
-          type: FileType.custom,
-          allowedExtensions: ['png','jpg']
-        );
-        if(result== null){
-          ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("No file selected"))
-          );
-          return null;
-        }
-        final path =result.files.single.path!;
-        final fileName =result.files.single.name;
-        storage.uploadFile(path,fileName).then(((value) => print('done')));
-        print(path);
-        print(fileName);
-      }, child: Text("Upload Image", style: TextStyle(color:Colors.black)))),
-
+        title: Text('Upload Image', style: TextStyle(color: Color.fromARGB(255, 241, 153, 55))),
+      ),
+      body: Center(
+          child: ElevatedButton(
+              onPressed: () async {
+                final result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: [
+                  'png',
+                  'jpg'
+                ]);
+                if (result == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("No file selected")));
+                  return null;
+                }
+                final path = result.files.single.path!;
+                final fileName = result.files.single.name;
+                storage.uploadFile(path, fileName).then(((value) => print('done')));
+                print(path);
+                print(fileName);
+              },
+              child: Text("Upload Image", style: TextStyle(color: Colors.black)))),
     );
-    
   }
 }

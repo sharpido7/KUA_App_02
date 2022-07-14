@@ -1,18 +1,40 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Storage{
   final firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
-Future <void> uploadFile( String filePath,String filesName) async {
+  late var PhotoLink="";
+  late var VideoLink="";
+Future <String> uploadPhoto( String filePath,String filesName) async {
 File file = File(filePath);
 try {
  await storage.ref('test/$filesName').putFile(file);
+    storage.ref().getDownloadURL().then((fileURL) {    
+       
+       PhotoLink = fileURL;    
+        
+   });    
 } on firebase_core.FirebaseException catch (e){
  print(e);
 }
-
-
+return PhotoLink;
 }
+Future <String> UploadVideo( String filePath,String filesName) async {
+File file = File(filePath);
+try {
+ await storage.ref('test/$filesName').putFile(file);
+  storage.ref().getDownloadURL().then((fileURL) {    
+       
+        VideoLink = fileURL;    
+        
+   });
+} on firebase_core.FirebaseException catch (e){
+ print(e);
+}
+return VideoLink;
+}
+
 
 }

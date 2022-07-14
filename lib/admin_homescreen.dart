@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kua_app_01/admin_login.dart';
-//import 'package:login_logout_app/Screens/Login_Screen.dart';
+import 'package:my_ideas_today/admin_login.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

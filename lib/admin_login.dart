@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:kua_app_01/button.dart';
-import 'package:kua_app_01/constants.dart';
-import '../constants.dart';
-import 'package:kua_app_01/homescreen.dart';
-import 'package:kua_app_01/admin_registration.dart';
+import 'package:my_ideas_today/button.dart';
+import 'package:my_ideas_today/constants.dart';
+import 'package:my_ideas_today/admin_homescreen.dart';
+import 'package:my_ideas_today/admin_registration.dart';
+import 'package:my_ideas_today/upload.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                     await Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (contex) => HomeScreen(),
+                                        builder: (contex) => Upload(),
                                       ),
                                     );
 

@@ -1,12 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kua_app_01/button.dart';
-//import 'package:login_logout_app/Component/button.dart';
-import 'package:kua_app_01/constants.dart';
-//import '../constants.dart';
-import 'package:kua_app_01/admin_login.dart';
-//import 'Login_Screen.dart';
+import 'package:my_ideas_today/button.dart';
+import 'package:my_ideas_today/constants.dart';
+import 'package:my_ideas_today/admin_login.dart';
 
 class SignupScreen extends StatefulWidget {
   @override

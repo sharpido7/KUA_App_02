@@ -11,8 +11,8 @@ Future <String> uploadPhoto( String filePath,String filesName) async {
 File file = File(filePath);
 try {
  await storage.ref('test/$filesName').putFile(file);
-    storage.ref().getDownloadURL().then((fileURL) {    
-       
+    storage.ref('test/$filesName').getDownloadURL().then((fileURL) {    
+       print(fileURL);
        PhotoLink = fileURL;    
         
    });    
@@ -25,7 +25,7 @@ Future <String> UploadVideo( String filePath,String filesName) async {
 File file = File(filePath);
 try {
  await storage.ref('test/$filesName').putFile(file);
-  storage.ref().getDownloadURL().then((fileURL) {    
+  storage.ref('test/$filesName').getDownloadURL().then((fileURL) {    
        
         VideoLink = fileURL;    
         

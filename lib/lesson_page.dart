@@ -4,6 +4,10 @@ import 'package:video_player/video_player.dart';
 //import 'package:url_launcher/url_launcher.dart';
 
 class Coursepage extends StatelessWidget {
+  final String video;
+  final String Author;
+  final String Title;
+  const Coursepage( this.video,this.Author,this.Title);
   Widget theTiles(String title, String sub, IconData icon) {
     return Column(
       children: [
@@ -36,6 +40,10 @@ class Coursepage extends StatelessWidget {
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () {
+        //          setState(() {
+        //   widget.videoController.pause();
+        //  Navigator.pushNamed(context, '/');
+        // });
                 Navigator.pushNamed(context, '/');
               },
             ),
@@ -66,7 +74,7 @@ class Coursepage extends StatelessWidget {
                             width: 355,
                             child: ChewieListItem(
                               videoPlayerController: VideoPlayerController.network(
-                                'https://firebasestorage.googleapis.com/v0/b/kua-app.appspot.com/o/jokate.mp4?alt=media&token=22c38d75-d501-4579-8e45-1c0e797763af',
+                                video,
                               ),
                               looping: true,
                             ),
@@ -89,14 +97,14 @@ class Coursepage extends StatelessWidget {
 
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 Expanded(
-                  child: Container(padding: EdgeInsets.all(20), color: Colors.black, child: Center(child: Text('Jockate Mwangelo', style: TextStyle(fontSize: 20.0, color: Colors.white)))),
+                  child: Container(padding: EdgeInsets.all(20), color: Colors.black, child: Center(child: Text(Author, style: TextStyle(fontSize: 20.0, color: Colors.white)))),
                 )
               ]),
 
               //Title of ther course
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 Expanded(
-                  child: Container(padding: EdgeInsets.all(20), color: Colors.black, child: Center(child: Text('LEADERSHIP', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white)))),
+                  child: Container(padding: EdgeInsets.all(20), color: Colors.black, child: Center(child: Text(Title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white)))),
                 )
               ]),
               Container(

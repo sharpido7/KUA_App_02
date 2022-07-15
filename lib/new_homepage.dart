@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 // import 'package:kua_app_01/registration.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ideas_today/admin_login.dart';
 import 'package:my_ideas_today/registration.dart';
 // import 'package:kua_app_01/course_upload.dart';
 // import 'list.dart';
@@ -62,9 +63,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     print(finalPhone);
   }
 
-  Widget CourseCard(firstName, lastName, courseTitle, imageName) {
+  Widget CourseCard(firstName, lastName, courseTitle, imageName,videoLink,Author,Title) {
     return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Coursepage())),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Coursepage(videoLink,Author,Title))),
       child: Container(
         margin: EdgeInsets.all(8.0),
         height: 150.0,
@@ -132,7 +133,18 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text('KUA App',style:TextStyle(color: Colors.orange)),backgroundColor:Colors.black, 
-        
+              leading: IconButton(
+              icon: Icon(Icons.file_upload, color: Colors.white),
+              onPressed: () {
+        // LoginScreen         setState(() {
+        //   widget.videoController.pause();
+        //  Navigator.pushNamed(context, '/');
+        // });
+                Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => 
+                            // HomePage()));
+                            LoginScreen()));
+              },),
         actions: [
           IconButton(icon: Icon(Icons.logout), onPressed: ()async {
           final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -204,7 +216,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     .map((doc) =>
               //new card
               // CourseCard(doc['Author'],doc['Category'], doc['Title'], doc['Photo']),
-              CourseCard('','','', doc['Photo']),
+              CourseCard('','','', doc['Photo'],doc['Videos'],doc['Author'],doc['Titles']),
 
            
                 ).toList());

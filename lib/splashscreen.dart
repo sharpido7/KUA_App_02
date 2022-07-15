@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
      getValidationData().whenComplete(() async{
            Timer(
         Duration(seconds: 5),
-        () => Get.to(finalPhone == null ? Registration() : Upload())
+        () => Get.to(finalPhone == null ? Registration() : Home())
             
             );
      });

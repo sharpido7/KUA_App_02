@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
 import 'chewie_list_item.dart';
 import 'package:video_player/video_player.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:url_launcher/url_launcher.dart';
 
 class Coursepage extends StatelessWidget {
   final String video;
   final String Author;
   final String Title;
-  const Coursepage( this.video,this.Author,this.Title);
+  List<String> videodata = [];
+  List<String> Titledata = [];
+  final CollectionReference videoList = FirebaseFirestore.instance.collection('Movie');
+  getVideos()async{
+       final QuerySnapshot querySnapshot = await videoList.get();
+    
+        querySnapshot.docs.forEach((doc) {
+         
+           Titledata.add(doc['LessonsTitleList']);
+           videodata.add(doc['LessonsTitleList']);
+            
+          }     
+      
+    );
+  }
+
+   Coursepage( this.video,this.Author,this.Title);
   Widget theTiles(String title, String sub, IconData icon) {
     return Column(
       children: [
@@ -150,6 +167,38 @@ class Coursepage extends StatelessWidget {
               theTiles('3.Passion', '2:09', Icons.done),
               theTiles('4.The Passion', '2:09', Icons.done),
               theTiles('6.The whole Story', '2:09', Icons.file_download),
+             FutureBuilder(
+  builder: (ctx, snapshot) {
+    // Checking if future is resolved
+    if (snapshot.connectionState == ConnectionState.done) {
+      // If we got an error
+      if (snapshot.hasError) {
+        return Center(
+          child: Text(
+            '${snapshot.error} occurred',
+            style: TextStyle(fontSize: 18),
+          ),
+        );
+         
+        // if we got our data
+      } else if (snapshot.hasData) {
+        // Extracting data from snapshot object
+        final data = snapshot.data as String;
+        return Center(
+          child: Text(
+            '$data',
+            style: TextStyle(fontSize: 18),
+          ),
+        );
+      }
+      
+    }
+     return Center();
+  
+   } ),
+      
+
+
             ]),
           )),
     );

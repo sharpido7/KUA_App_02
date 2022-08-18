@@ -6,7 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 class Storage{
   final firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
   late var PhotoLink="";
-  late var VideoLink="";
+  late var VideoLink= [];
+  //List <String> VideoLink=[];
 Future <String> uploadPhoto( String filePath,String filesName) async {
 File file = File(filePath);
 try {
@@ -21,13 +22,13 @@ try {
 }
 return PhotoLink;
 }
-Future <String> UploadVideo( String filePath,String filesName) async {
+Future  UploadVideo( String filePath,String filesName) async {
 File file = File(filePath);
 try {
  await storage.ref('test/$filesName').putFile(file);
   storage.ref('test/$filesName').getDownloadURL().then((fileURL) {    
        
-        VideoLink = fileURL;    
+        VideoLink.add(fileURL);    
         
    });
 } on firebase_core.FirebaseException catch (e){

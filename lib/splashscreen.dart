@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:my_ideas_today/courseuploadbyed.dart';
 import 'package:my_ideas_today/new_homepage.dart';
 import 'package:get/get.dart';
 import 'package:my_ideas_today/registration.dart';
 import 'package:my_ideas_today/upload.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 
@@ -20,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
      getValidationData().whenComplete(() async{
            Timer(
         Duration(seconds: 5),
-        () => Get.to(finalPhone == null ? Registration() : Home())
+        () => Get.to(finalPhone == null ? Registration() : MyApp())
             
             );
      });

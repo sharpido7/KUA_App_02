@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:my_ideas_today/button.dart';
 import 'package:my_ideas_today/constants.dart';
 import 'package:my_ideas_today/admin_homescreen.dart';
+import 'package:my_ideas_today/courseuploadbyed.dart';
 import 'package:my_ideas_today/admin_registration.dart';
 import 'package:my_ideas_today/upload.dart';
 
@@ -97,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                     await Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (contex) => Upload(),
+                                        builder: (contex) => MyApp(),
                                       ),
                                     );
 

@@ -15,6 +15,7 @@ class Upload extends StatefulWidget {
 
 class _UploadState extends State<Upload> {
    final formkey = GlobalKey<FormState>();
+
   UploadTask? task;
   
   final TextEditingController _course_title = TextEditingController();
@@ -27,6 +28,9 @@ class _UploadState extends State<Upload> {
   var TheVideoLink="";
   
   var urlDownload="";
+
+
+
   @override
   Widget build(BuildContext context) {
    
@@ -95,7 +99,7 @@ class _UploadState extends State<Upload> {
                            SizedBox( height: 10,),
           
                            SizedBox(
-                            //  height: 68,
+                             height: 68,
                             //  width:64,
                              child: TextFormField(
                                   //initialValue: 'First Name',
@@ -201,10 +205,13 @@ class _UploadState extends State<Upload> {
                              ),
                            ),
                            SizedBox( height: 10,),
+                          Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                             children: [ 
           
                             SizedBox(
-                            //  height: 68,
-                            //  width:64,
+                             height: 68,
+                             width:250,
                              child: TextFormField(
                                   //initialValue: 'First Name',
                                   // obscureText: true,
@@ -234,15 +241,18 @@ class _UploadState extends State<Upload> {
                              
                              ),
                            ),
-                           SizedBox( height: 10,),
+                          // SizedBox( height: 10,),
         
-                           Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                             children: [
-                     ElevatedButton(
+                           
+                     SizedBox(
+                    height: 58,
+                     width:120,
+                       child: ElevatedButton(
+
            style: ElevatedButton.styleFrom(
-                           primary: Colors.orange
-                         ),
+          
+                             primary: Colors.orange
+                           ),
             onPressed: ()async{
             final result = await FilePicker.platform.pickFiles(
               allowMultiple: false,
@@ -263,14 +273,29 @@ class _UploadState extends State<Upload> {
             
             )) ;
             print(path); 
-            TheVideoLink = storage.VideoLink;
+            // TheVideoLink = storage.VideoLink;
             print(fileName);
-          }, child: Text("Upload video", style: TextStyle(color:Colors.black))) 
+          }, child: Text("Upload video", style: TextStyle(color:Colors.black))),
+                     ) 
         
         
         
                              ],
-                           ),SizedBox( height: 10,),
+                           ),
+                           SizedBox( height: 10,),
+                           Row(
+                           mainAxisAlignment: MainAxisAlignment.end, 
+                           children: [
+                            FloatingActionButton(
+                              backgroundColor: Color.fromARGB(255, 241, 153, 55),
+                              onPressed: (){},
+                              child: Icon( Icons.add,
+                                    color: Colors.black,
+                                    ),
+                            ),
+                           ],
+                           ),
+                            SizedBox( height: 10,),
         
                                       Row(
                  children: [

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:my_ideas_today/registration.dart';
 import 'package:my_ideas_today/upload.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:my_ideas_today/newcoursepage.dart';
 
 
 
@@ -16,14 +17,48 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  //   //ADDED TO FIX TILE VIDEO CHANGING BUG
+  // List<String> videoLinks2 = [
+  //   'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+  //   'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+  //   'https://www.youtube.com/watch?v=GJ6_nOqtuLw&list=PLyQSN7X0ro22zanLOcvkaSY-IZqheFYM5&index=3'
+  // ];
+
+  // List<String> instructorFirstName2 = [
+  //   'DIAMOND',
+  //   'JOKATE',
+  //   'EDWIN',
+  // ];
+
+  // List<String> videoTitles = [
+  //  'How to bocome a leader','Starting on Music','The begining'
+  // ];
+
+
   @override
   void initState() {
   
      getValidationData().whenComplete(() async{
            Timer(
         Duration(seconds: 5),
-        () => Get.to(finalPhone == null ? Registration() : MyApp())
-            
+        () => Get.to(finalPhone == null ? Registration() :Home() 
+        
+//         Coursepage(
+//     ['https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+//     'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+//     'https://www.youtube.com/watch?v=GJ6_nOqtuLw&list=PLyQSN7X0ro22zanLOcvkaSY-IZqheFYM5&index=3'
+//   ],
+// [
+//   'How to bocome a leader','Starting on Music','The begining'
+// ],
+//   [
+//     'DIAMOND',
+//     'JOKATE',
+//     'EDWIN',
+//   ]
+//         )
+        )           
             );
      });
      super.initState();
@@ -64,11 +99,11 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //CircleAvatar(backgroundColor: Colors.blue,radius: 90.0,
-                  //backgroundImage: AssetImage('assets/daladala3.png'),)
-                  // Image.asset('assets/daladala3.png', height: 200, width: 200),
-                  Icon( Icons.wb_incandescent_rounded,
-                              color: Color.fromARGB(255, 241, 153, 55),size: 40),
+                  // CircleAvatar(backgroundColor: Color.fromARGB(255, 142, 174, 201),radius: 90.0,
+                  // backgroundImage: AssetImage('assets/Group 90.png'),),
+                  Image.asset('assets/Group 90.png', height: 170, width: 170),
+                  // Icon( Icons.wb_incandescent_rounded,
+                  //             color: Color.fromARGB(255, 241, 153, 55),size: 40),
                   Padding(padding: EdgeInsets.only(top: 0.0)),
                 ],
               )),

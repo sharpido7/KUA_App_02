@@ -1,5 +1,7 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:my_ideas_today/storage_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -20,7 +22,8 @@ class _MyAppState extends State<MyApp> {
   TextEditingController courseTitle = new TextEditingController();
   List<DynamicWidget> listDynamic = [];
   List<String> data = [];
-
+  final Storage storage =Storage();
+  UploadTask? task;
   Icon floatingIcon = new Icon(Icons.add);
   List<String> toList1() {
     listDynamic.forEach((widget) {
@@ -84,16 +87,26 @@ class _MyAppState extends State<MyApp> {
   SubmitButton() {
     return Container(
       child: new ElevatedButton(
-        onPressed: () => FirebaseFirestore.instance.collection('lessonstitlelist').add({
+        onPressed: () {
+
+          // while( storage.VideoLink.length!= toList1().length){
+          //     continue;
+
+          // }
+          
+         
+          FirebaseFirestore.instance.collection('Course').add({
           "LessonsTitleList": toList1(),
+          "Photo":storage.PhotoLink,
           "Author": author.text,
           "Category": category.text,
-          "CourseTitle": courseTitle.text,
-          // "point": [
-          //   'hi',
-          //   'there'
-          // ]
-        }),
+          "Titles": courseTitle.text,
+          "Videos":storage.VideoLink
+       
+        });
+        
+        // storage.VideoLink.clear();
+        },
         style: ElevatedButton.styleFrom(
           primary: Colors.orange, // Background color
         ),
@@ -161,7 +174,36 @@ class _MyAppState extends State<MyApp> {
               ),
 
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async{
+                             final result = await FilePicker.platform.pickFiles(
+              allowMultiple: false,
+              type: FileType.custom,
+              allowedExtensions: ['png','jpg']
+            );
+            if(result== null){
+              ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("No file selected"))
+              );
+              return null;
+            }
+            final Photopath =result.files.single.path!;
+            final PhotofileName =result.files.single.name;
+            task = storage.uploadPhoto(Photopath,PhotofileName).then(((value) => { print('done')}
+            )) as UploadTask? ;
+                setState(() {});
+      
+           if (task == null) return;
+      
+          final snapshot = await task!.whenComplete(() {});
+          //  setState(() async{
+          //   urlDownload = await snapshot.ref.getDownloadURL();
+          //  });
+          
+          // print('Download-Link: $urlDownload');
+          //  ThePhotoLink = storage.PhotoLink;
+            print(Photopath);
+            print(PhotofileName);
+                },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.orange, // Background color
                 ),
@@ -214,46 +256,71 @@ class DynamicWidget extends StatelessWidget {
   TextEditingController courseTitle = TextEditingController();
   TextEditingController author = TextEditingController();
   TextEditingController category = TextEditingController();
-
+  final Storage storage =Storage();
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: new EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            //MODIFICATIONS
-
-            //MODIFICATIONS
-            new Padding(
-              padding: new EdgeInsets.all(16.0),
-              child: TextField(
-                controller: lessonTitle,
-                style: TextStyle(color: Colors.orange),
-                //decoration: new InputDecoration(hintText: 'Enter Lesson Title'),
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.edit_calendar,
-                        color: Color.fromARGB(255, 241, 153, 55)),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 36, 36, 36),
-                    hintText: 'Enter Lesson Title',
-                    hintStyle:
-                        TextStyle(color: Color.fromARGB(255, 89, 89, 89)),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(0.0))),
-              ),
-            ),
-
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                primary: Colors.orange, // Background color
-              ),
-              child: new Padding(
+    return SingleChildScrollView(
+      child: Container(
+          margin: new EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              //MODIFICATIONS
+    
+              //MODIFICATIONS
+              new Padding(
                 padding: new EdgeInsets.all(16.0),
-                child: new Text('Select a video '),
+                child: TextField(
+                  controller: lessonTitle,
+                  style: TextStyle(color: Colors.orange),
+                  //decoration: new InputDecoration(hintText: 'Enter Lesson Title'),
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.edit_calendar,
+                          color: Color.fromARGB(255, 241, 153, 55)),
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 36, 36, 36),
+                      hintText: 'Enter Lesson Title',
+                      hintStyle:
+                          TextStyle(color: Color.fromARGB(255, 89, 89, 89)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(0.0))),
+                ),
               ),
-            ),
-          ],
-        ));
+    
+              ElevatedButton(
+                onPressed: () async{
+                  final result = await FilePicker.platform.pickFiles(
+                allowMultiple: false,
+                type: FileType.custom,
+                allowedExtensions: ['mp4','mkv']
+              );
+              if(result== null){
+                ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("No file selected"))
+                );
+                return null;
+              }
+              final path =result.files.single.path!;
+              final fileName =result.files.single.name;
+             // ignore: avoid_print
+               await storage.UploadVideo(path,fileName).then(((value) => { print('done')}
+               
+              
+              )) ;
+              print(path); 
+              // TheVideoLink = storage.VideoLink;
+              print(fileName);
+               print(storage.VideoLink);
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.orange, // Background color
+                ),
+                child: new Padding(
+                  padding: new EdgeInsets.all(16.0),
+                  child: new Text('Select a video '),
+                ),
+              ),
+            ],
+          )),
+    );
   }
 }

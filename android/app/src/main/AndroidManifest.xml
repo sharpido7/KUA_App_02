@@ -2,10 +2,14 @@
     package="com.example.my_ideas_today">
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="my_ideas_today"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        
+        >
         <activity
             android:name=".MainActivity"
             android:exported="true"

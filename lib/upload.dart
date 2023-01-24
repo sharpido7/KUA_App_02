@@ -24,8 +24,7 @@ class _UploadState extends State<Upload> {
   final TextEditingController _lesson_title = TextEditingController();
    final Storage storage =Storage();
     bool isloading = false;
- var ThePhotoLink="";
-  var TheVideoLink="";
+
   
   var urlDownload="";
 

@@ -1,13 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-// import 'package:kua_app_01/registration.dart';
+ import 'package:my_ideas_today/lessonspage_by_ed.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ideas_today/admin_login.dart';
+import 'package:my_ideas_today/player.dart';
 import 'package:my_ideas_today/registration.dart';
 // import 'package:kua_app_01/course_upload.dart';
 // import 'list.dart';
-import 'package:my_ideas_today/lesson_page.dart';
+import 'package:my_ideas_today/chewie_player.dart';
 import 'package:my_ideas_today/profile_page.dart';
+import 'package:my_ideas_today/newcoursepage2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -33,6 +35,8 @@ class HomeScreenWidget extends StatefulWidget {
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   int _selectedIndex = 0;
+  List<String> videoLinks = [];
+  List<String> videoTitles = [];
 
   /*void _onItemTapped(int index) {
     setState(() {
@@ -63,9 +67,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     print(finalPhone);
   }
 
-  Widget CourseCard(firstName, lastName, courseTitle, imageName,videoLink,Author,Title) {
+  Widget CourseCard(firstName, lastName, courseTitle, imageName,videoLink,Author,Title,LessonTitles,LessonLinks) {
     return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Coursepage(videoLink,Author,Title))),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Coursepage(LessonLinks,LessonTitles,Author,Title))),
       child: Container(
         margin: EdgeInsets.all(8.0),
         height: 150.0,
@@ -114,18 +118,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     // );
   }
 
-//  Future <List> GettheDatas() async{
-//     var data=[];
-//     final QuerySnapshot querySnapshot = await CourseRef.get();
-//       querySnapshot.docs.forEach((doc) {
-//         //  CourseCard('JOKATE', 'MWANGELO', 'Leadership', 'jokate');
-//         data.add(CourseCard(doc['Author'],doc['Category'] ,doc['Title'], doc['Photo']));
-//       });
-
-// return data;
-//  }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +135,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => 
                             // HomePage()));
-                            LoginScreen()));
+                            LoginScreen()
+                            // Player()
+                              // ChewieDemo()
+                            ));
               },),
         actions: [
           IconButton(icon: Icon(Icons.logout), onPressed: ()async {
@@ -209,6 +204,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             {
               if(snapshot.hasData){
                final documents = snapshot.data?.docs as List;
+               ;
                 return ListView(
             // This next line does the trick.
             scrollDirection: Axis.horizontal,
@@ -216,8 +212,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     .map((doc) =>
               //new card
               // CourseCard(doc['Author'],doc['Category'], doc['Title'], doc['Photo']),
-              CourseCard('','','', doc['Photo'],doc['Videos'],doc['Author'],doc['Titles']),
-
+              CourseCard('','','', doc['Photo'],doc['Videos'],doc['Author'],doc['Titles'],doc['LessonTitles'],doc['LessonLinks']),
+              
            
                 ).toList());
               }else if (snapshot.hasError) {

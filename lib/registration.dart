@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_ideas_today/login_screen.dart';
 // import 'package:kua_app_01/otp_screen.dart';
 // import 'package:kua_app_01/homepage.dart';
 // import 'package:kua_app_01/otp_screen.dart';
@@ -45,6 +46,7 @@ class _RegistrationState extends State<Registration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Colors.black,
       appBar:AppBar(
         title: Text("KUA APP"), 
@@ -68,7 +70,7 @@ class _RegistrationState extends State<Registration> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
-                   margin: EdgeInsets.only(right: 230),
+                   margin: EdgeInsets.only(right: 210),
                   child: Text('REGISTER',style: TextStyle(fontSize: 40,
                   color: Color.fromARGB(255, 241, 153, 55),fontWeight:FontWeight.bold,
                   ),),
@@ -79,11 +81,12 @@ class _RegistrationState extends State<Registration> {
                         //  width:64,
                          child: TextFormField(
                               //initialValue: 'First Name',
+                              
       
                               decoration:  InputDecoration(
                                 
                               prefixIcon: Icon( Icons.person,
-                              color: Color.fromARGB(255, 241, 153, 55)
+                              color: Color.fromARGB(255, 185, 159, 128)
                               ),
                               
                               filled: true,
@@ -98,7 +101,7 @@ class _RegistrationState extends State<Registration> {
                         //    }
                         //  },
                         controller:_firstname,
-                         style: Theme.of(context).textTheme.headline6,
+                         style:  TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                          keyboardType: TextInputType.name,
                         // textAlign:TextAlign.center,
                         //  inputFormatters: [LengthLimitingTextInputFormatter(1),
@@ -131,7 +134,7 @@ class _RegistrationState extends State<Registration> {
                         //    }
                         //  },
                         controller:_lastname,
-                         style: Theme.of(context).textTheme.headline6,
+                         style:  TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                          keyboardType: TextInputType.name,
                         // textAlign:TextAlign.center,
                         //  inputFormatters: [LengthLimitingTextInputFormatter(1),
@@ -163,7 +166,7 @@ class _RegistrationState extends State<Registration> {
                              FocusScope.of(context).nextFocus();
                            }
                          },
-                         style: Theme.of(context).textTheme.headline6,
+                         style:  TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                          keyboardType: TextInputType.number,
                          textAlign:TextAlign.center,
                          
@@ -196,7 +199,7 @@ class _RegistrationState extends State<Registration> {
                        ),
                               SizedBox(
                          height: 68,
-                         width:260,
+                         width:250,
                          child: TextFormField(
                               //initialValue: 'First Name',
                          
@@ -212,7 +215,7 @@ class _RegistrationState extends State<Registration> {
                                              //      FocusScope.of(context).nextFocus();
                                              //    }
                                              //  },
-                         style: Theme.of(context).textTheme.headline6,
+                         style: TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                          keyboardType: TextInputType.number,
                           controller: _controller,
                                              // textAlign:TextAlign.center,
@@ -247,7 +250,7 @@ class _RegistrationState extends State<Registration> {
                         //    }
                         //  },
                         controller:_username,
-                         style: Theme.of(context).textTheme.headline6,
+                         style:  TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                          keyboardType: TextInputType.text,
                         // textAlign:TextAlign.center,
                         //  inputFormatters: [LengthLimitingTextInputFormatter(1),
@@ -280,7 +283,7 @@ class _RegistrationState extends State<Registration> {
                         //    }
                         //  },
                         controller:_password,
-                         style: Theme.of(context).textTheme.headline6,
+                         style: TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                          keyboardType: TextInputType.text,
                         // textAlign:TextAlign.center,
                         //  inputFormatters: [LengthLimitingTextInputFormatter(1),
@@ -312,7 +315,7 @@ class _RegistrationState extends State<Registration> {
                         //      FocusScope.of(context).nextFocus();
                         //    }
                         //  },
-                         style: Theme.of(context).textTheme.headline6,
+                         style:  TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                          keyboardType: TextInputType.text,
                         // textAlign:TextAlign.center,
                         //  inputFormatters: [LengthLimitingTextInputFormatter(1),
@@ -404,7 +407,16 @@ class _RegistrationState extends State<Registration> {
                          children: [
                            Text('Already Registered?',
                            style:TextStyle( color:Colors.white,fontSize: 23) 
-                           ), TextButton(onPressed: null, child:Text('LOGIN',style:TextStyle( color:Colors.orange,fontSize: 25)))
+                           ), TextButton(onPressed:(){
+                           
+                             Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => 
+                            // HomePage()));
+                             LoginPage()));
+                           
+                           }
+                           
+                           , child:Text('LOGIN',style:TextStyle( color:Colors.orange,fontSize: 25)))
                          ],
                        )
             ],

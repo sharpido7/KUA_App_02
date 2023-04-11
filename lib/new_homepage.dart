@@ -3,13 +3,15 @@ import 'package:flutter/cupertino.dart';
  import 'package:my_ideas_today/lessonspage_by_ed.dart';
 import 'package:flutter/material.dart';
 import 'package:my_ideas_today/admin_login.dart';
-import 'package:my_ideas_today/player.dart';
+import 'package:my_ideas_today/progress_upload.dart';
 import 'package:my_ideas_today/registration.dart';
+import 'package:my_ideas_today/audioplayer.dart';
 // import 'package:kua_app_01/course_upload.dart';
 // import 'list.dart';
 import 'package:my_ideas_today/chewie_player.dart';
 import 'package:my_ideas_today/profile_page.dart';
 import 'package:my_ideas_today/newcoursepage2.dart';
+import 'package:my_ideas_today/upload_audiocourse.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -67,9 +69,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     print(finalPhone);
   }
 
-  Widget CourseCard(firstName, lastName, courseTitle, imageName,videoLink,Author,Title,LessonTitles,LessonLinks) {
+  Widget CourseCard(firstName, lastName, courseTitle, imageName,/*videoLink*/Author,Title/*LessonTitles,LessonLinks*/,AudioLink) {
     return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Coursepage(LessonLinks,LessonTitles,Author,Title))),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Coursepage(/*LessonLinks,LessonTitles*/Author,Title,imageName,AudioLink))),
       child: Container(
         margin: EdgeInsets.all(8.0),
         height: 150.0,
@@ -138,6 +140,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             LoginScreen()
                             // Player()
                               // ChewieDemo()
+                            //  Upload()
+
+                            //  AudioUploadPage()
+                            //  HomeScreen()
                             ));
               },),
         actions: [
@@ -147,7 +153,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => 
                             // HomePage()));
-                            Registration()));
+                            LoginScreen()
+                            ));
          
                   await FirebaseAuth.instance.signOut();
                    Navigator.pushAndRemoveUntil(context,
@@ -212,8 +219,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     .map((doc) =>
               //new card
               // CourseCard(doc['Author'],doc['Category'], doc['Title'], doc['Photo']),
-              CourseCard('','','', doc['Photo'],doc['Videos'],doc['Author'],doc['Titles'],doc['LessonTitles'],doc['LessonLinks']),
-              
+              //CourseCard('','','', doc['Photo'],doc['Videos'],doc['Author'],doc['Titles'],doc['LessonTitles'],doc['LessonLinks'],doc['Audio']),
+               CourseCard('','','', doc['Photo']/*,doc['Videos']*/,doc['Author'],doc['Titles'],/*doc['LessonTitles'],doc['LessonLinks'],*/doc['Audio']),
            
                 ).toList());
               }else if (snapshot.hasError) {

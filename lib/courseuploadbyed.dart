@@ -101,7 +101,7 @@ class _MyAppState extends State<MyApp> {
           "Author": author.text,
           "Category": category.text,
           "Titles": courseTitle.text,
-          "Videos":storage.VideoLink
+          "Audio":storage.AudioLink
        
         });
         
@@ -309,7 +309,7 @@ class DynamicWidget extends StatelessWidget {
               print(path); 
               // TheVideoLink = storage.VideoLink;
               print(fileName);
-               print(storage.VideoLink);
+              // print(storage.VideoLink);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.orange, // Background color

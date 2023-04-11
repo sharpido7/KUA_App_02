@@ -311,7 +311,7 @@ class _UploadState extends State<Upload> {
                                   setState(() {
                                     isloading = true;
                                   }); 
-                             
+                             //_UploadState.buildProgress();
                              final CourseTitle= _course_title.text;
                               final Author= _author.text;
                               final Category= _category.text;
@@ -385,7 +385,7 @@ Future UploadCourse({required CourseTitle, required Author,required Category,req
     "Photo":storage.PhotoLink,
     "Category":Category,
     "Titles": LessonTitle,
-    "Videos":storage.VideoLink
+    "Audio":storage.AudioLink
   };
   await docUser.set(json);
 
@@ -396,4 +396,48 @@ Future UploadCourse({required CourseTitle, required Author,required Category,req
             ),
           );
 
-}}
+}
+
+// widget.buildProgress()=> StreamBuilder<TaskSnapshot>(
+  
+//   stream: uploadTask?.snapshotEvents,
+//   builder:(context, snapshot) {
+//     if (snapshot.hasData){
+//   final data = snapshot.data!;
+//   double progress = data.bytesTransferred/data.totalBytes;
+//     }else{
+//        return const SizedBox(height:50
+//        child: Stack(
+//         fit:StackFit.expand,
+//         children: [
+//           LinearProgressIndicator(
+//            value:progress,
+//             backgroundColor: Colors.grey,
+//             color:Colors.orange,
+//           ),
+//           Center(
+//             child:Text(
+//             '${(100*progress).roundToDouble()}%'
+//             style: const TextStyle(color:Colors.black87)
+
+//             )) ,)
+          
+
+//         ],
+
+//        ),
+       
+       
+       
+//        );
+//     }
+//   });
+
+
+
+
+
+
+
+
+}

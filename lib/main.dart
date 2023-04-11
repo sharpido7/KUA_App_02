@@ -1,3 +1,5 @@
+import 'package:easy_audio_player/helpers/init_just_audio_background.dart';
+import 'package:easy_audio_player/models/notification_configuration.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,8 +8,10 @@ import 'package:my_ideas_today/new_homepage.dart';
 import 'package:get/get.dart';
 import 'package:my_ideas_today/splashscreen.dart';
 import 'package:my_ideas_today/upload.dart';
+import 'package:just_audio/just_audio.dart';
 
 void  main() async{
+  await initJustAudioBackground(NotificationSettings(androidNotificationChannelId: 'com.example.example'));
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());

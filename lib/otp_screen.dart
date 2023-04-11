@@ -98,7 +98,7 @@ class _OtpPageState extends State<OtpPage> {
                            FocusScope.of(context).nextFocus();
                          }
                        },
-                       style: Theme.of(context).textTheme.headline6,
+                       style:  TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                        keyboardType: TextInputType.number,
                        textAlign:TextAlign.center,
                        inputFormatters: [LengthLimitingTextInputFormatter(1),
@@ -123,8 +123,11 @@ class _OtpPageState extends State<OtpPage> {
                          if(value.length==1){
                            FocusScope.of(context).nextFocus();
                          }
+                         else {
+                        FocusScope.of(context).previousFocus();
+                      }
                        },
-                       style: Theme.of(context).textTheme.headline6,
+                       style:  TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                        keyboardType: TextInputType.number,
                        textAlign:TextAlign.center,
                        inputFormatters: [LengthLimitingTextInputFormatter(1),
@@ -148,8 +151,11 @@ class _OtpPageState extends State<OtpPage> {
                          if(value.length==1){
                            FocusScope.of(context).nextFocus();
                          }
+                         else {
+                        FocusScope.of(context).previousFocus();
+                      }
                        }, 
-                      style: Theme.of(context).textTheme.headline6,
+                      style:  TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                        keyboardType: TextInputType.number,
                        textAlign:TextAlign.center,
                        inputFormatters: [LengthLimitingTextInputFormatter(1),
@@ -174,8 +180,11 @@ class _OtpPageState extends State<OtpPage> {
                          if(value.length==1){
                            FocusScope.of(context).nextFocus();
                          }
+                         else {
+                        FocusScope.of(context).previousFocus();
+                      }
                        }, 
-                       style: Theme.of(context).textTheme.headline6,
+                       style:  TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                        keyboardType: TextInputType.number,
                        textAlign:TextAlign.center,
                        inputFormatters: [LengthLimitingTextInputFormatter(1),
@@ -200,8 +209,11 @@ class _OtpPageState extends State<OtpPage> {
                          if(value.length==1){
                            FocusScope.of(context).nextFocus();
                          }
+                         else {
+                        FocusScope.of(context).previousFocus();
+                      }
                        }, 
-                       style: Theme.of(context).textTheme.headline6,
+                       style:  TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                        keyboardType: TextInputType.number,
                        textAlign:TextAlign.center,
                        inputFormatters: [LengthLimitingTextInputFormatter(1),
@@ -226,8 +238,11 @@ class _OtpPageState extends State<OtpPage> {
                          if(value.length==1){
                            FocusScope.of(context).nextFocus();
                          }
+                         else {
+                        FocusScope.of(context).previousFocus();
+                      }
                        }, 
-                       style: Theme.of(context).textTheme.headline6,
+                       style: TextStyle(color:Color.fromARGB(255, 241, 153, 55)),
                        keyboardType: TextInputType.number,
                        textAlign:TextAlign.center,
                        inputFormatters: [LengthLimitingTextInputFormatter(1),

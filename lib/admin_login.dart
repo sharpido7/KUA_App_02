@@ -7,6 +7,7 @@ import 'package:my_ideas_today/admin_homescreen.dart';
 import 'package:my_ideas_today/courseuploadbyed.dart';
 import 'package:my_ideas_today/admin_registration.dart';
 import 'package:my_ideas_today/upload.dart';
+import 'package:my_ideas_today/upload_audiocourse.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -98,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                     await Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (contex) => MyApp(),
+                                        builder: (contex) =>AudioUploadPage(),
                                       ),
                                     );
 

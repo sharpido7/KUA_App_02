@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:my_ideas_today/courseuploadbyed.dart';
 import 'package:my_ideas_today/new_homepage.dart';
 import 'package:get/get.dart';
+import 'package:my_ideas_today/otp_screen.dart';
 import 'package:my_ideas_today/registration.dart';
 import 'package:my_ideas_today/upload.dart';
+import 'package:my_ideas_today/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:my_ideas_today/newcoursepage.dart';
 
@@ -42,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
      getValidationData().whenComplete(() async{
            Timer(
         Duration(seconds: 5),
-        () => Get.to(finalPhone == null ? Registration() :Home() 
+        () => Get.to(finalPhone == null ? Registration() :Registration() /*Home()*/
         
 //         Coursepage(
 //     ['https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
